@@ -88,7 +88,7 @@
     }
 
     const urlParams = new URLSearchParams(window.location.search);
-    let soundLink = cleanQuotes(urlParams.get("audiolink"));
+    let audioLink = cleanQuotes(urlParams.get("audiolink"));
     let emoji = cleanQuotes(urlParams.get("emoji"));
 
     if (!audioLink || !emoji) {
