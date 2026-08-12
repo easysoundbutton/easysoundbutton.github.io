@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Easy Sound Button</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #434445;
+      font-family: system-ui;
+      user-select: none;
+      image-rendering: pixelated;
+      color: #ffffff;
+    }
+
+    button {
+      padding: 1px 1px;
+      font-size: 200px;
+      color: #ffffff;
+      background-color: #434445;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+      font-family: system-ui;
+      font-weight: 400;
+      font-style: normal;
+      -webkit-tap-highlight-color: transparent;
+      text-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
+    }
+
+    button:active {
+      transform: scale(0.90);
+    }
+
+    #errorMsg {
+      position: fixed;
+      bottom: 20px;
+      background-color: rgba(255, 0, 0, 0.85);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      display: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+  <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt; &lt;text y=%22.9em%22 font-size=%2290%22&gt; 🔊 &lt;/text&gt; &lt;/svg&gt;" />
+</head>
+<body>
+
+  <button id="clickBtn">🍎</button>
+  <div id="errorMsg"></div>
+
+  <script>
+    const clickBtn = document.getElementById("clickBtn");
+    const errorMsg = document.getElementById("errorMsg");
+    let errorTimeout;
+
+    function showError(text) {
+      errorMsg.textContent = text;
+      errorMsg.style.display = "block";
+      clearTimeout(errorTimeout);
+      errorTimeout = setTimeout(() => {
+        errorMsg.style.display = "none";
+      }, 5000);
+    }
+
+    function isValidUrl(string) {
+      try {
+        new URL(string);
+        return true;
+      } catch (_) {
+        return false;
+      }
+    }
+
+    // Tırnak işaretlerini temizlemek için yardımcı fonksiyon
+    function cleanQuotes(str) {
+      if (!str) return str;
+      return str.replace(/^["']|["']$/g, '');
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    let soundLink = cleanQuotes(urlParams.get("soundlink"));
+    let emoji = cleanQuotes(urlParams.get("emoji"));
+
+    if (!soundLink || !emoji) {
+      soundLink = soundLink || "sound-link-here";
+      emoji = emoji || "🍎";
+
+      urlParams.set("soundlink", `"${soundLink}"`);
+      urlParams.set("emoji", `"${emoji}"`);
+
+      const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+      window.history.replaceState({}, '', newUrl);
+    }
+
+    clickBtn.textContent = emoji;
+
+    let clickSound = null;
+
+    if (isValidUrl(soundLink)) {
+      clickSound = new Audio(soundLink);
+    }
+
+    clickBtn.addEventListener("click", () => {
+      if (!isValidUrl(soundLink)) {
+        showError("Invalid audio URL provided.");
+        return;
+      }
+
+      if (clickSound) {
+        clickSound.currentTime = 0;
+        clickSound.play().catch(() => {
+          showError("Failed to play audio. Resource not found or sound blocked.");
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
