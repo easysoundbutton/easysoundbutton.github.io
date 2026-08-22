@@ -5,7 +5,7 @@
 
 **Step 2:** Open the website: _[https://easysoundbutton.github.io](https://easysoundbutton.github.io)_
 
-**Step 3:** Look at the link end: _/?audiolink="audio-link-here"&emoji="🍎"_
+**Step 3:** Look at the link end: _/?audiolink=audio-link-here&emoji=🍎_
 
 **Step 4:** Replace _audio-link-here_ with your audio link.
 
