@@ -95,8 +95,8 @@
       audioLink = audioLink || "audio-link-here";
       emoji = emoji || "🍎";
 
-      urlParams.set("audiolink", `"${audioLink}"`);
-      urlParams.set("emoji", `"${emoji}"`);
+      urlParams.set("audiolink", `${audioLink}`);
+      urlParams.set("emoji", `${emoji}`);
 
       const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
       window.history.replaceState({}, '', newUrl);
