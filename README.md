@@ -1,7 +1,7 @@
 ## How to use the website
 **Step 1:** Find an audio link. I'm going to take this:  _https://www.myinstants.com/media/sounds/what-bottom-text-meme-sanctuary-guardian-sound-effect-hd.mp3_
 
-> If the audio link isn't a direct file, it won't work so look if the link ends with _.mp3_, _.ogg_, _.wav_, _.m4a_ or [any audio file extension](https://en.wikipedia.org/wiki/Audio_file_format#List_of_formats). If it does end with these, it is an audio link.
+> If the audio link isn't a direct file, it won't work so look if the link ends with _.mp3_, _.ogg_, _.wav_, _.m4a_ or [any audio file extension](https://en.wikipedia.org/wiki/Audio_file_format#List_of_formats). If the link does end with these, it is an audio link.
 
 **Step 2:** Open the website: _[https://easysoundbutton.github.io](https://easysoundbutton.github.io)_
 
